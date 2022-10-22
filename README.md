@@ -1,13 +1,15 @@
 
 ## GetSimple CMS php8.x support.
 
-Updates and patches for CMS & Plugins. 
+Updates and patches for GS-CMS & Plugins. 
 
 We spend hours in updates and developments so you dont have to.
 
-☕ If this project helped you reduce time to develop, you can give me a cup of coffee :) 
+☕ If this project helped you reduce time to develop, you can give me a cup of coffee ☕  
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=TW6PXVCTM5A72)
+
+---
 
 ### Downloads:
 
