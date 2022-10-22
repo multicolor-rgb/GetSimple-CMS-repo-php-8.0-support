@@ -5,7 +5,7 @@ Updates and patches for CMS & Plugins.
 
 We spend hours in updates and developments so you dont have to.
 
-☕ Consider buying us a coffee ![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://www.paypal.com/donate/?hosted_button_id=TW6PXVCTM5A72)
+☕ Consider buying us a coffee ![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)] (https://www.paypal.com/donate/?hosted_button_id=TW6PXVCTM5A72)
 
 ### Downloads:
 
