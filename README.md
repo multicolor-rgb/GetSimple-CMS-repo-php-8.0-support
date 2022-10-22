@@ -3,6 +3,8 @@
 
 Updates and patches for CMS & Plugins. 
 
+We spend hours in updates and developments so you dont have to.
+Consider buying us a coffee ![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)
 
 ### Downloads:
 
@@ -29,13 +31,15 @@ Simply overwrite your current install with the updated files.
  - Missing php7 extension on file_ext_blacklist 
 
  > [Download](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/risingisland/GetSimple-CMS-repo-php-8.0-support/tree/main/GS-3.3.16-php-8.x-Patch)
+ 
 ---
 
 ### About i18n update:
 
  - Added php8.x compatibility fixes.
   
- > [Download](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/multicolor-rgb/GetSimple-CMS-repo-php-8.0-support/tree/main/i18n).
+ > [Download](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/multicolor-rgb/GetSimple-CMS-repo-php-8.0-support/tree/main/i18n)
+ 
 ---
  
 ## Contributing
