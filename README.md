@@ -4,7 +4,7 @@
 Updates and patches for CMS & Plugins. 
 
 
-## Downloads:
+### Downloads:
 
 - [GS Patch](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/risingisland/GetSimple-CMS-repo-php-8.0-support/tree/main/GS-3.3.16-php-8.x-Patch) for php8.x compatibility.
 - [i18n Plugin update](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/multicolor-rgb/GetSimple-CMS-repo-php-8.0-support/tree/main/i18n).
@@ -28,11 +28,14 @@ Simply overwrite your current install with the updated files.
  - Changed function name do to deprecated class constructor.
  - Missing php7 extension on file_ext_blacklist 
 
+ > [Download](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/risingisland/GetSimple-CMS-repo-php-8.0-support/tree/main/GS-3.3.16-php-8.x-Patch)
 ---
 
- ### About i18n update:
-  - Added php8.x compatibility fixes.
+### About i18n update:
+
+ - Added php8.x compatibility fixes.
   
+ > [Download](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/multicolor-rgb/GetSimple-CMS-repo-php-8.0-support/tree/main/i18n).
 ---
  
 ## Contributing
