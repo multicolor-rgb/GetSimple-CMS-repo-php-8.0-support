@@ -14,7 +14,8 @@ We spend hours in updates and developments so you dont have to.
 ### Downloads:
 
 - [GS Patch](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/risingisland/GetSimple-CMS-repo-php-8.0-support/tree/main/GS-3.3.16-php-8.x-Patch) for php8.x compatibility.
-- [i18n Plugin update](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/multicolor-rgb/GetSimple-CMS-repo-php-8.0-support/tree/main/i18n).
+- [i18n Plugin CE](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/multicolor-rgb/GetSimple-CMS-repo-php-8.0-support/tree/main/i18n).
+- [i18n Gallery CE](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/multicolor-rgb/GetSimple-CMS-repo-php-8.0-support/tree/main/i18n-gallery).
 
 ---
 ---
@@ -39,11 +40,19 @@ Simply overwrite your current install with the updated files.
  
 ---
 
-### About i18n update:
+### About i18n CE:
 
  - Added php8.x compatibility fixes.
   
  > [Download](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/multicolor-rgb/GetSimple-CMS-repo-php-8.0-support/tree/main/i18n)
+ 
+---
+
+### About i18n Gallery CE:
+
+ - Added php8.x compatibility fixes.
+  
+ > [Download](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/multicolor-rgb/GetSimple-CMS-repo-php-8.0-support/tree/main/i18n-gallery)
  
 ---
  
