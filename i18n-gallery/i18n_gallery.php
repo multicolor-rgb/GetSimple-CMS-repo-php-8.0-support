@@ -18,8 +18,8 @@ define('I18N_GALLERY_DEFAULT_THUMB_HEIGHT', 120);
 # register plugin
 register_plugin(
 	$thisfile, 
-	'I18N Gallery', 	
-	'2.2.1 - Community Edition', 		
+	'I18N Gallery - Community Edition', 	
+	'2.2.1', 		
 	'Martin Vlcek',
 	'http://mvlcek.bplaced.net', 
 	'Display image galleries (I18N enabled)',
