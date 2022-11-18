@@ -1,7 +1,7 @@
 <?php
   function i18n_navigation_structure_load(&$pages, &$languages) {
-    $pages = array();
-    $languages = array();
+    $pages = [];
+    $languages = [];
     $is_i18n = function_exists('return_i18n_default_language');
 	  $dir_handle = @opendir(GSDATAPAGESPATH) or die("Unable to open pages directory");
     $files_to_ignore = '/^$/';
@@ -18,9 +18,9 @@
           $url = substr($url, 0, strpos($url,'_'));
           if (!in_array($lang, $languages)) $languages[] = $lang;
           if (!isset($pages[$url])) {
-            $pages[$url] = array('url' => $url, 'variants' => array(), 'exists' => false, 'title' => '', 'menuOrder' => 99, 'parent' => null);
+            $pages[$url] = ['url' => $url, 'variants' => [], 'exists' => false, 'title' => '', 'menuOrder' => 99, 'parent' => null];
           }
-          $pages[$url]['variants'][$lang] = array('url' => $url.'_'.$lang);
+          $pages[$url]['variants'][$lang] = ['url' => $url.'_'.$lang];
           $pages[$url]['variants'][$lang]['language'] = $lang;
           $pages[$url]['variants'][$lang]['title'] = (string) $data->title;
           $pages[$url]['variants'][$lang]['menu'] = (string) $data->menu;
@@ -29,7 +29,7 @@
           $pages[$url]['variants'][$lang]['private'] = (string) $data->private;
         } else {
           if (!isset($pages[$url])) {
-            $pages[$url] = array('url' => $url, 'variants' => array());
+            $pages[$url] = ['url' => $url, 'variants' => []];
           }
           $pages[$url]['exists'] = true;
           $pages[$url]['parent'] = (string) $data->parent;
@@ -49,7 +49,7 @@
   }
 
   function i18n_navigation_structure_save(&$pages) {
-    $stack = array();
+    $stack = [];
     for ($i=0; isset($_POST['page_'.$i.'_url']); $i++) {
       $url = $_POST['page_'.$i.'_url'];
       if (isset($pages[$url])) {

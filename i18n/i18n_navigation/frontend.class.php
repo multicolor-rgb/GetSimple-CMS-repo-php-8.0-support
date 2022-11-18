@@ -21,7 +21,7 @@ class I18nNavigationFrontend {
     $cachefile = GSDATAOTHERPATH . I18N_CACHE_FILE;
     if (!I18N_USE_CACHE || !file_exists($cachefile)) {
       // read pages into associative array
-      self::$pages = array();
+      self::$pages = [];
       $dir_handle = @opendir(GSDATAPAGESPATH) or die("Unable to open pages directory");
       while ($filename = readdir($dir_handle)) {
         if (strrpos($filename,'.xml') === strlen($filename)-4 && !is_dir(GSDATAPAGESPATH . $filename)) {
@@ -31,17 +31,17 @@ class I18nNavigationFrontend {
             $url = substr($data->url,0,$pos);
             $lang = substr($data->url,$pos+1);
             if (!isset(self::$pages[$url])) {
-              self::$pages[$url] = array('url' => $url);
+              self::$pages[$url] = ['url' => $url];
             }
-            $menu = ((string) $data->menu ? (string) $data->menu : (string) $data->title);
-            $title = ((string) $data->title ? (string) $data->title : (string) $data->menu);
+            $menu = ((string) $data->menu ?: (string) $data->title);
+            $title = ((string) $data->title ?: (string) $data->menu);
             if ($menu) self::$pages[$url]['menu_'.$lang] = stripslashes($menu);
             if ($title) self::$pages[$url]['title_'.$lang] = stripslashes($title);
             if (isset($data->link) && (string) $data->link) self::$pages[$url]['link_'.$lang] = (string) $data->link;
           } else {
             $url = (string) $data->url;
             if (!isset(self::$pages[$url])) {
-              self::$pages[$url] = array('url' => $url);
+              self::$pages[$url] = ['url' => $url];
             }
             self::$pages[$url]['menuStatus'] = (string) $data->menuStatus;
             self::$pages[$url]['menuOrder'] = (int) $data->menuOrder;
@@ -55,12 +55,11 @@ class I18nNavigationFrontend {
         }
       }
       // sort pages
-      $urlsToDelete = array();
-      $sortedpages = array();
+      $urlsToDelete = [];
+      $sortedpages = [];
       foreach (self::$pages as $url => $page) {
         if (isset($page['parent']) && $page['private'] != 'Y') {
-          $sortedpages[] = array('url' => $url, 'parent' => $page['parent'],
-             'sort' => sprintf("%s%03s%s", $page['parent'], $page['menuOrder'], $url));
+          $sortedpages[] = ['url' => $url, 'parent' => $page['parent'], 'sort' => sprintf("%s%03s%s", $page['parent'], $page['menuOrder'], $url)];
         } else {
           $urlsToDelete[] = $url;
         }
@@ -82,23 +81,23 @@ class I18nNavigationFrontend {
         XMLsave($data, $cachefile);
       }
     } else {
-      $sortedpages = array();
+      $sortedpages = [];
       $data = getXML($cachefile);
       foreach ($data->page as $pagedata) {
         $url = '' . $pagedata->url;
-        self::$pages[$url] = array();
+        self::$pages[$url] = [];
         foreach ($pagedata as $propdata) {
           self::$pages[$url][$propdata->getName()] = (string) $propdata;
         }
-        $sortedpages[] = array('url' => $url, 'parent' => self::$pages[$url]['parent']);
+        $sortedpages[] = ['url' => $url, 'parent' => self::$pages[$url]['parent']];
       }
     }
     // fill children
-    self::$pages[null] = array();
+    self::$pages[null] = [];
     foreach ($sortedpages as $sortedpage) {
       $parent = $sortedpage['parent'];
       if (isset(self::$pages[$parent])) {
-        if (!isset(self::$pages[$parent]['children'])) self::$pages[$parent]['children'] = array();
+        if (!isset(self::$pages[$parent]['children'])) self::$pages[$parent]['children'] = [];
         self::$pages[$parent]['children'][] = $sortedpage['url'];
       }
     }
@@ -107,7 +106,7 @@ class I18nNavigationFrontend {
 
   public static function getPageStructure($slug=null, $menuOnly=true, $slugToIgnore=null, $lang=null) {
     $slug = '' . $slug;
-    $structure = array();
+    $structure = [];
     self::getPageStructureImpl($structure, $slug, $menuOnly, $slugToIgnore, $lang);
     if ($lang) {
       for ($i=count($structure)-1; $i>=0; $i--) {
@@ -134,23 +133,9 @@ class I18nNavigationFrontend {
             $title = $lang ? $pages[$childslug]['title_'.$lang] : $pages[$childslug]['title'];
             $menu = $pages[$childslug]['menu'];
             if ($lang && isset($pages[$childslug]['menu_'.$lang])) $menu = $pages[$childslug]['menu_'.$lang];
-            $structure[] = array(
-              'level' => $level,
-              'url' => $childslug,
-              'title' => $title,
-              'menuStatus' => $pages[$childslug]['menuStatus'],
-              'menu' => $menu,
-              'parent' => $pages[$childslug]['parent']
-            );
+            $structure[] = ['level' => $level, 'url' => $childslug, 'title' => $title, 'menuStatus' => $pages[$childslug]['menuStatus'], 'menu' => $menu, 'parent' => $pages[$childslug]['parent']];
           } else {
-            $structure[] = array(
-              'level' => $level,
-              'url' => $childslug,
-              'title' => '',
-              'menuStatus' => $pages[$childslug]['menuStatus'],
-              'menu' =>'',
-              'parent' => $pages[$childslug]['parent']
-            );
+            $structure[] = ['level' => $level, 'url' => $childslug, 'title' => '', 'menuStatus' => $pages[$childslug]['menuStatus'], 'menu' =>'', 'parent' => $pages[$childslug]['parent']];
           }
           self::getPageStructureImpl($structure, $childslug, $menuOnly, $slugToIgnore, $lang);
         }
@@ -161,7 +146,7 @@ class I18nNavigationFrontend {
   public static function getMenu($slug, $minlevel=0, $maxlevel=0, $show=I18N_SHOW_NORMAL) {
     $slug = '' . $slug;
     $pages = self::getPages();
-    $breadcrumbs = array();
+    $breadcrumbs = [];
     for ($url = $slug; $url && isset($pages[$url]); $url = $pages[$url]['parent']) {
       array_unshift($breadcrumbs, $url);
     }
@@ -171,7 +156,7 @@ class I18nNavigationFrontend {
     $currenturl = $breadcrumbs[$icu];
     // menus to display
     if ($minlevel < 0 || $maxlevel < $minlevel || $minlevel >= count($breadcrumbs)) {
-      return array();
+      return [];
     } else {
       return self::getMenuImpl($breadcrumbs, $currenturl, $breadcrumbs[$minlevel], $maxlevel-$minlevel+1, $show);
     }
@@ -182,7 +167,7 @@ class I18nNavigationFrontend {
     $pages = self::getPages();
     if (!@$pages[$url] || $levels <= 0) return null;
     $deflang = function_exists('return_i18n_default_language') ? return_i18n_default_language() : null;
-    $menu = array();
+    $menu = [];
     if (isset($pages[$url]['children'])) {
       foreach ($pages[$url]['children'] as $childurl) {
         $showIt = true;
@@ -193,8 +178,7 @@ class I18nNavigationFrontend {
         }
         if ($showIt) {
           global $filters;
-          $params = array($childurl, $pages[$childurl]['parent'], 
-                          preg_split('/\s*,\s*/', html_entity_decode(stripslashes(trim(@$pages[$childurl]['tags'])), ENT_QUOTES, 'UTF-8')));
+          $params = [$childurl, $pages[$childurl]['parent'], preg_split('/\s*,\s*/', html_entity_decode(stripslashes(trim(@$pages[$childurl]['tags'])), ENT_QUOTES, 'UTF-8'))];
           foreach ($filters as $filter)  {
             if ($filter['filter'] == I18N_FILTER_VETO_NAV_ITEM) {
               if (call_user_func_array($filter['function'], $params)) {
@@ -207,17 +191,7 @@ class I18nNavigationFrontend {
         if ($showIt) {
           $showChildren = !($show & I18N_FILTER_CURRENT) || in_array($childurl,$breadcrumbs);
           $children = $showChildren ? self::getMenuImpl($breadcrumbs, $currenturl, $childurl, $levels-1, $show) : null;
-          $menu[] = array(
-            'url' => $childurl, 
-            'parent' => $pages[$childurl]['parent'],
-            'menu' => self::getProperty($childurl,'menu',$deflang), 
-            'title' => self::getProperty($childurl,'title',$deflang),
-            'link' => self::getProperty($childurl,'link',$deflang),
-            'currentpath' => in_array($childurl, $breadcrumbs),
-            'current' => ($childurl == $currenturl),
-            'children' => $children,
-            'haschildren' => $showChildren ? count(array($children)) > 0 : self::hasChildren($childurl, $show)
-          );
+          $menu[] = ['url' => $childurl, 'parent' => $pages[$childurl]['parent'], 'menu' => self::getProperty($childurl,'menu',$deflang), 'title' => self::getProperty($childurl,'title',$deflang), 'link' => self::getProperty($childurl,'link',$deflang), 'currentpath' => in_array($childurl, $breadcrumbs), 'current' => ($childurl == $currenturl), 'children' => $children, 'haschildren' => $showChildren ? count(array($children)) > 0 : self::hasChildren($childurl, $show)];
         }
       }
     }
@@ -288,8 +262,8 @@ class I18nNavigationFrontend {
       $classes = $urlclass . $parentclass . 
                   ($item['current'] ? ' current' : ($item['currentpath'] ? ' currentpath' : '')) . 
                   (isset($item['children']) && count($item['children']) > 0 ? ' open' : ($item['haschildren'] ? ' closed' : ''));
-      $text = $item['menu'] ? $item['menu'] : $item['title'];
-      $title = $item['title'] ? $item['title'] : $item['menu'];
+      $text = $item['menu'] ?: $item['title'];
+      $title = $item['title'] ?: $item['menu'];
       if (isset($component)) {
         $navitem = new I18nNavigationItem($item, $classes, $text, $title, $showTitles, $component);
         $html .= self::getMenuItem($component, $navitem);
@@ -319,15 +293,10 @@ class I18nNavigationFrontend {
   public static function getBreadcrumbs($slug) {
     $slug = '' . $slug;
     $pages = self::getPages();
-    $breadcrumbs = array();
+    $breadcrumbs = [];
     $deflang = function_exists('return_i18n_default_language') ? return_i18n_default_language() : null;
     for ($url = $slug; $url && isset($pages[$url]); $url = $pages[$url]['parent']) {
-      array_unshift($breadcrumbs, array(
-            'url' => $url, 
-            'parent' => $pages[$url]['parent'],
-            'menu' => self::getProperty($url,'menu',$deflang), 
-            'title' => self::getProperty($url,'title',$deflang),
-      ));
+      array_unshift($breadcrumbs, ['url' => $url, 'parent' => $pages[$url]['parent'], 'menu' => self::getProperty($url,'menu',$deflang), 'title' => self::getProperty($url,'title',$deflang)]);
     }
     return $breadcrumbs;
   }
@@ -336,8 +305,8 @@ class I18nNavigationFrontend {
     $slug = '' . $slug;
     $breadcrumbs = self::getBreadcrumbs($slug);
     foreach ($breadcrumbs as &$item) {
-      $text = $item['menu'] ? $item['menu'] : $item['title'];
-      $title = $item['title'] ? $item['title'] : $item['menu'];
+      $text = $item['menu'] ?: $item['title'];
+      $title = $item['title'] ?: $item['menu'];
       $url = function_exists('find_i18n_url') ? find_i18n_url($item['url'],$item['parent']) : find_url($item['url'],$item['parent']);
       echo ' &raquo; <span class="breadcrumb"><a href="' . $url . '" title="' . 
                 strip_quotes($title) . '">' . $text . '</a></span>';
@@ -355,7 +324,7 @@ class I18nNavigationItem {
   private $showTitles;
   private $component;
   private $deflang = null;
-  private $data = array();
+  private $data = [];
   
   public function I18nNavigationItem($item, $classes, $text, $title, $showTitles, $component) {
     $this->item = $item;

@@ -4,13 +4,13 @@
     $pos = strpos($slug, '_');
     $lang = $pos !== false ? substr($slug, $pos+1) : null;
     $structure = I18nNavigationFrontend::getPageStructure(null, false, null, $lang);
-    $pages = array();
+    $pages = [];
     $nbsp = html_entity_decode('&nbsp;', ENT_QUOTES, 'UTF-8');
     $lfloor = html_entity_decode('&lfloor;', ENT_QUOTES, 'UTF-8');
     foreach ($structure as $page) {
       $text = ($page['level'] > 0 ? str_repeat($nbsp,5*$page['level']-2).$lfloor.$nbsp : '').cl($page['title']);
-      $link = find_i18n_url($page['url'], $page['parent'], '('.($lang ? $lang : return_i18n_default_language()).')');
-      $pages[] = array($text, $link);
+      $link = find_i18n_url($page['url'], $page['parent'], '('.($lang ?: return_i18n_default_language()).')');
+      $pages[] = [$text, $link];
     }
 ?>
 <script type="text/javascript">

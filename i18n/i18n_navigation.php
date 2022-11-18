@@ -106,7 +106,7 @@ add_action('edit-extras', 'i18n_navigation_edit');
 add_action('html-editor-init', 'i18n_navigation_editor');
 add_action('changedata-save', 'i18n_navigation_save'); 
 add_action('page-delete', 'i18n_clear_cache'); // GetSimple 3.0+
-add_action('pages-sidebar', 'createSideMenu', array($thisfile, i18n_r('i18n_navigation/EDIT_NAVIGATION')));
+add_action('pages-sidebar', 'createSideMenu', [$thisfile, i18n_r('i18n_navigation/EDIT_NAVIGATION')]);
 add_action('index-pretemplate', 'i18n_check_redirect');
 add_action('header', 'i18n_navigation_admin_header');
 
@@ -117,7 +117,7 @@ if (!function_exists('get_site_version') && basename($_SERVER['PHP_SELF']) == 'd
 # refresh page cache after menu edit
 @include_once(GSADMININCPATH.'caching_functions.php'); // workaround, because caching_functions is only included later
 if (function_exists('create_pagesxml')) {
-  add_action('menu-aftersave', 'create_pagesxml', array('true'));
+  add_action('menu-aftersave', 'create_pagesxml', ['true']);
 }
 
 # ===== BACKEND HOOKS =====
