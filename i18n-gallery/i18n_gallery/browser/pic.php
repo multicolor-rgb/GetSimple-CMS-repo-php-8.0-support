@@ -31,7 +31,7 @@ if (defined('I18N_GALLERY_PIC_FILTER') && I18N_GALLERY_PIC_FILTER) {
       @session_start();
       foreach ($filters as $filter)  {
         if ($gallery && $filter['filter'] == 'image-veto') {
-          if (call_user_func_array($filter['function'], array($gallery, $infile, $tags))) error404();
+          if (call_user_func_array($filter['function'], [$gallery, $infile, $tags])) error404();
         }
       }
       exec_action('pre-image');
@@ -46,7 +46,7 @@ $maxWidth = @$_GET['w'] ? intval($_GET['w']) : null;
 $maxHeight = @$_GET['h'] ? intval($_GET['h']) : null;
 $displacement = @$_GET['d'] ? intval($_GET['d']) : null;
 $crop = @$_GET['c'] && $maxWidth && $maxHeight;
-$datadir = substr(dirname(__FILE__), 0, strrpos(dirname(__FILE__), DIRECTORY_SEPARATOR.'plugins')) . '/data/';
+$datadir = substr(__DIR__, 0, strrpos(__DIR__, DIRECTORY_SEPARATOR.'plugins')) . '/data/';
 $imagedir = $datadir . 'uploads/';
 if (!$maxWidth && !$maxHeight) {
   $info = @getimagesize($imagedir.$infile);
@@ -59,7 +59,7 @@ if (!$maxWidth && !$maxHeight) {
   $pos = strrpos($infile,'/');
   if ($pos === false) $pos = -1;
   $outfile = substr($infile, 0, $pos+1) . 'i18npic.' . ($crop ? 'C' : '') . 
-             ($maxWidth ? $maxWidth : '0') . 'x' . ($maxHeight ? $maxHeight : '0') . 
+             ($maxWidth ?: '0') . 'x' . ($maxHeight ?: '0') . 
              ($displacement ? 'd'.$displacement : '') . '.' . substr($infile, $pos+1);
   $outfile = substr($outfile, 0, strrpos($outfile,'.')) . '.jpg';
   $thumbdir = $datadir . 'thumbs/';
@@ -120,6 +120,9 @@ if (!$maxWidth && !$maxHeight) {
   readfile($thumbdir.$outfile);
 } 
 
+/**
+ * @return never
+ */
 function error404() {
   header('HTTP/1.1 404 Not Found');
   header('Content-Type: text/plain');

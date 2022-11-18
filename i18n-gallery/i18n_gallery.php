@@ -18,7 +18,7 @@ define('I18N_GALLERY_DEFAULT_THUMB_HEIGHT', 120);
 # register plugin
 register_plugin(
 	$thisfile, 
-	'I18N Gallery - Community Edition', 	
+	'I18N Gallery', 	
 	'2.2.1', 		
 	'Martin Vlcek',
 	'http://mvlcek.bplaced.net', 
@@ -38,11 +38,11 @@ $i18n_gallery_pic_used = false;
 
 # activate filter
 add_action('header','i18n_gallery_header');
-add_action('nav-tab', 'createNavTab', array('i18n_gallery', $thisfile, i18n_r('i18n_gallery/TAB'), 'overview'));
-add_action('i18n_gallery-sidebar', 'createSideMenu', array($thisfile, i18n_r('i18n_gallery/GALLERIES'), 'overview'));
-add_action('i18n_gallery-sidebar', 'createSideMenu', array($thisfile, i18n_r('i18n_gallery/CREATE_GALLERY'), 'create'));
-add_action('i18n_gallery-sidebar', 'createSideMenu', array($thisfile, i18n_r('i18n_gallery/EDIT_GALLERY'), 'edit', false));
-add_action('i18n_gallery-sidebar', 'createSideMenu', array($thisfile, i18n_r('i18n_gallery/SETTINGS'), 'configure'));
+add_action('nav-tab', 'createNavTab', ['i18n_gallery', $thisfile, i18n_r('i18n_gallery/TAB'), 'overview']);
+add_action('i18n_gallery-sidebar', 'createSideMenu', [$thisfile, i18n_r('i18n_gallery/GALLERIES'), 'overview']);
+add_action('i18n_gallery-sidebar', 'createSideMenu', [$thisfile, i18n_r('i18n_gallery/CREATE_GALLERY'), 'create']);
+add_action('i18n_gallery-sidebar', 'createSideMenu', [$thisfile, i18n_r('i18n_gallery/EDIT_GALLERY'), 'edit', false]);
+add_action('i18n_gallery-sidebar', 'createSideMenu', [$thisfile, i18n_r('i18n_gallery/SETTINGS'), 'configure']);
 
 add_action('index-pretemplate','i18n_gallery_preview');
 add_action('theme-header','i18n_gallery_theme_header');
@@ -157,7 +157,7 @@ function get_i18n_gallery_link($name, $params = null) {
   require_once(GSPLUGINPATH.'i18n_gallery/gallery.class.php');
   require_once(GSPLUGINPATH.'i18n_gallery/frontend.class.php');
   if (is_array($name)) $params = $name; 
-  else if (!@$params) $params = array('name' => $name);
+  else if (!@$params) $params = ['name' => $name];
   else $params['name'] = $name;
   $gallery = I18nGallery::getGalleryFromParams($params, true);
   I18nGalleryFrontend::outputLink($gallery);
@@ -167,12 +167,12 @@ function get_i18n_gallery_header($name, $params = null) {
   require_once(GSPLUGINPATH.'i18n_gallery/gallery.class.php');
   include_once(GSPLUGINPATH.'i18n_gallery/helper.php');
   if (is_array($name)) $params = $name; 
-  else if (!@$params) $params = array('name' => $name);
+  else if (!@$params) $params = ['name' => $name];
   else $params['name'] = $name;
   $gallery = I18nGallery::getGalleryFromParams($params, true);
   $plugins = I18nGallery::getPlugins();
   $plugin = @$plugins[$gallery['type']];
-  if ($plugin) call_user_func_array($plugin['header'], array($gallery));
+  if ($plugin) call_user_func_array($plugin['header'], [$gallery]);
 }
 
 function get_i18n_gallery_header_from_content($content) {
@@ -185,7 +185,7 @@ function get_i18n_gallery_header_from_content($content) {
       $plugin = @$plugins[$gallery['type']];
       if ($plugin) {
         include_once(GSPLUGINPATH.'i18n_gallery/helper.php');
-        call_user_func_array($plugin['header'], array($gallery));
+        call_user_func_array($plugin['header'], [$gallery]);
       }
     }
     $i18n_gallery_on_page = true;
@@ -195,7 +195,7 @@ function get_i18n_gallery_header_from_content($content) {
 function get_i18n_gallery($name, $params = null) {
   require_once(GSPLUGINPATH.'i18n_gallery/gallery.class.php');
   if (is_array($name)) $params = $name; 
-  else if (!@$params) $params = array('name' => $name);
+  else if (!@$params) $params = ['name' => $name];
   else $params['name'] = $name;
   $gallery = I18nGallery::getGalleryFromParams($params);
   if ($gallery) {

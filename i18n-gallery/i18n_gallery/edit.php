@@ -1,6 +1,6 @@
 <?php
 function i18n_gallery_from_request($languages) {
-  $gallery = array('items' => array());
+  $gallery = ['items' => []];
   $gallery['title'] = @$_POST['post-title'];
   if (count($languages) > 0) foreach ($languages as $language) {
     if (@$_POST['post-title_'.$language]) $gallery['title_'.$language] = $_POST['post-title_'.$language];
@@ -15,17 +15,7 @@ function i18n_gallery_from_request($languages) {
     $filename = $_POST['post-item_'.$i.'_filename'];
     list($width,$height) = @getimagesize(GSDATAUPLOADPATH.$filename);
 		$ss = @stat(GSDATAUPLOADPATH.$filename);
-    $gal = array(
-      'filename' => $filename,
-      'title' => @$_POST['post-item_'.$i.'_title'],
-      'tags' => @$_POST['post-item_'.$i.'_tags'],
-      'description' => @$_POST['post-item_'.$i.'_description'],
-      'longitude' => @$_POST['post-item_'.$i.'_longitude'],
-      'latitude' => @$_POST['post-item_'.$i.'_latitude'],
-      'size' => $ss['size'],
-      'width' => $width,
-      'height' => $height
-    );
+    $gal = ['filename' => $filename, 'title' => @$_POST['post-item_'.$i.'_title'], 'tags' => @$_POST['post-item_'.$i.'_tags'], 'description' => @$_POST['post-item_'.$i.'_description'], 'longitude' => @$_POST['post-item_'.$i.'_longitude'], 'latitude' => @$_POST['post-item_'.$i.'_latitude'], 'size' => $ss['size'], 'width' => $width, 'height' => $height];
     if (count($languages) > 0) foreach ($languages as $language) {
       if (@$_POST['post-item_'.$i.'_title_'.$language]) $gal['title_'.$language] = $_POST['post-item_'.$i.'_title_'.$language];
       if (@$_POST['post-item_'.$i.'_description_'.$language]) $gal['description_'.$language] = $_POST['post-item_'.$i.'_description_'.$language];
@@ -69,7 +59,7 @@ function i18n_gallery_save_undo($name, $newname) {
 
 global $SITEURL, $gallery;
 require_once(GSPLUGINPATH.'i18n_gallery/gallery.class.php');
-$languages = array();
+$languages = [];
 if (function_exists('return_i18n_default_language')) {
 	$dir_handle = @opendir(GSDATAPAGESPATH) or die("Unable to open pages directory");
   while ($filename = readdir($dir_handle)) {
@@ -152,9 +142,9 @@ if (!@$gallery['type']) $gallery['type'] = @$settings['type'] ? $settings['type'
 
 		  <p>
 			  <label for="post-title" style="display:none;"><?php i18n('i18n_gallery/TITLE'); ?></label>
-        <input type="text" class="text title lang lang_" id="post-title" name="post-title" value="<?php echo htmlspecialchars(@$gallery['title']?? ''); ?>"/>
+        <input type="text" class="text title lang lang_" id="post-title" name="post-title" value="<?php if(isset($gallery['title'])){ echo htmlspecialchars(@$gallery['title']);} ?>"/>
 <?php if (count($languages) > 0) foreach ($languages as $language) { ?>
-        <input type="text" class="text title lang lang_<?php echo $language; ?>" name="post-title_<?php echo $language; ?>" value="<?php echo htmlspecialchars(@$gallery['title_'.$language] ?? ''); ?>" style="display:none"/>
+        <input type="text" class="text title lang lang_<?php echo $language; ?>" name="post-title_<?php echo $language; ?>" value="<?php echo htmlspecialchars(@$gallery['title_'.$language]); ?>" style="display:none"/>
 <?php } ?>
 		  </p>
  
@@ -162,13 +152,13 @@ if (!@$gallery['type']) $gallery['type'] = @$settings['type'] ? $settings['type'
   			<div class="leftopt">
           <p>
             <label for="post-name"><?php i18n('i18n_gallery/NAME'); ?></label>
-            <input type="text" class="text" id="post-name" name="post-name" value="<?php echo htmlspecialchars(@$gallery['name']?? ''); ?>"/>
+            <input type="text" class="text" id="post-name" name="post-name" value="<?php echo @htmlspecialchars(@$gallery['name']); ?>"/>
           </p>
           <p>
             <label for="post-type"><?php i18n('i18n_gallery/TYPE'); ?></label>
             <select id="post-type" name="post-type" class="text">
 <?php if (count($plugins) > 0) foreach ($plugins as $plugin) { ?>
-              <option value="<?php echo $plugin['type']; ?>" <?php echo $plugin['type'] == @$gallery['type'] ? 'selected="selected"' : ''; ?>><?php echo htmlspecialchars($plugin['name'] ); ?></option>
+              <option value="<?php echo $plugin['type']; ?>" <?php echo $plugin['type'] == @$gallery['type'] ? 'selected="selected"' : ''; ?>><?php echo htmlspecialchars($plugin['name']); ?></option>
 <?php } ?>
             </select>
           </p>
@@ -182,7 +172,7 @@ if (!@$gallery['type']) $gallery['type'] = @$settings['type'] ? $settings['type'
 <?php if (count($plugins) > 0) foreach ($plugins as $plugin) { ?>
         <div class="rightopt">
     			<div class="type type_<?php echo $plugin['type']; ?>" style="display:<?php echo $plugin['type'] == @$gallery['type'] ? 'block' : 'none'; ?>">
-            <?php call_user_func_array($plugin['edit'], array($gallery)); ?>
+            <?php call_user_func_array($plugin['edit'], [$gallery]); ?>
           </div>
         </div>
 <?php } ?>

@@ -4,7 +4,7 @@
    *
    * Displays and selects file link to insert
    */
-   
+
   function i18n_gallery_exif_text($text, $defEnc=null) {
     if (!$defEnc) $defEnc = 'ISO-8859-15'; 
     if (function_exists('mb_convert_encoding') && function_exists('mb_detect_encoding')) {
@@ -13,9 +13,9 @@
       return $text;
     }
   }
-   
+
   function i18n_gallery_image_info($file, $defEnc=null, $debug=false) {
-    $info = array();
+    $info = [];
     if ($debug) $info['debug'] = '';
     // 1. get XMP meta data (it's in UTF-8 and we shouldn't have problems)
     try {
@@ -43,7 +43,7 @@
           }
           $elems = $xmp->xpath("//dc:subject/rdf:Bag/rdf:li");
           if ($elems && count($elems) > 0) {
-            $info['tags'] = array();
+            $info['tags'] = [];
             foreach ($elems as $elem) $info['tags'][] = (string) $elem;
           }
         }
@@ -69,7 +69,7 @@
           if ($info['description'] == @$info['title']) unset($info['description']);
         }
         if (!isset($info['tags']) && @$iptc['2#025']) { # keywords
-          $info['tags'] = array();
+          $info['tags'] = [];
           foreach ($iptc['2#025'] as $t) $info['tags'][] = i18n_gallery_exif_text($t); 
         }
         if (!isset($info['author']) && @$iptc['2#080']) { # author
@@ -112,7 +112,7 @@
     }
     return $info;
   }
-   
+
   include('../../../gsconfig.php');
   $admin = defined('GSADMIN') ? GSADMIN : 'admin';
   include("../../../${admin}/inc/common.php");
@@ -122,7 +122,7 @@
 
   i18n_merge('i18n_gallery',substr($LANG,0,2));
   i18n_merge('i18n_gallery','en');
-  
+
   if (isset($_GET['path'])) {
     $subPath = preg_replace('/\.+\//','',$_GET['path']);
     if ($subPath) $subPath .= '/';
@@ -153,8 +153,8 @@
 	$dircount="0";
 	$counter = "0";
 	$totalsize = 0;
-	$filesArray = array();
-	$dirsArray = array();
+	$filesArray = [];
+	$dirsArray = [];
 
   clearstatcache();
   $dir_handle = opendir($path) or die("Unable to open $path");
@@ -170,11 +170,7 @@
 			  $ss = @stat($path . $file);
         list($width,$height) = getimagesize($path . $file);
         $info = i18n_gallery_image_info($path . $file, null, @$debug);
-        $filesArray[] = array('name' => $file, 'date' => @date('M j, Y',$ss['ctime']), 'size' => fSize($ss['size']), 
-                              'bytes' => $ss['size'], 'width' => $width, 'height' => $height,
-                              'title' => @$info['title'], 'tags' => @$info['tags'],
-                              'description' => @$info['description'], 
-                              'debug' => @$info['debug']);
+        $filesArray[] = ['name' => $file, 'date' => @date('M j, Y',$ss['ctime']), 'size' => fSize($ss['size']), 'bytes' => $ss['size'], 'width' => $width, 'height' => $height, 'title' => @$info['title'], 'tags' => @$info['tags'], 'description' => @$info['description'], 'debug' => @$info['debug']];
 			  $totalsize = $totalsize + $ss['size'];
 			  $count++;
       }
@@ -232,18 +228,11 @@
 		}
 	}
 
-  $metadata = array();
-	if (count($filesSorted) != 0) { 			
-		foreach ($filesSorted as $upload) {
+  $metadata = [];
+	if (count((array)$filesSorted) != 0) { 			
+		foreach ((array)$filesSorted as $upload) {
       $onclick = 'submitLink('.count($metadata).')';
-      $metadata[] = array('url' => $subPath.$upload['name'],
-                          'size' => $upload['bytes'],
-                          'width' => $upload['width'],
-                          'height' => $upload['height'],
-                          'title' => $upload['title'],
-                          'tags' => $upload['tags'],
-                          'description' => $upload['description']
-                         );
+      $metadata[] = ['url' => $subPath.$upload['name'], 'size' => $upload['bytes'], 'width' => $upload['width'], 'height' => $upload['height'], 'title' => $upload['title'], 'tags' => $upload['tags'], 'description' => $upload['description']];
 			if ($isUnixHost && defined('GSDEBUG') && function_exists('posix_getpwuid')) {
 				$filePerms = substr(sprintf('%o', fileperms($path.$upload['name'])), -4);
 				$fileOwner = posix_getpwuid(fileowner($path.$upload['name']));
@@ -279,7 +268,7 @@
 ?>
         </tbody>
       </table>
-	    <p><em><b><?php echo count($filesSorted); ?></b> <?php i18n('TOTAL_FILES'); ?> (<?php echo fSize($totalsize); ?>)</em></p>
+	    <p><em><b><?php echo count((array)$filesSorted); ?></b> <?php i18n('TOTAL_FILES'); ?> (<?php echo fSize($totalsize); ?>)</em></p>
       <p><a href="javascript:void(0)" onclick="submitAllLinks()"><?php i18n('i18n_gallery/ADD_ALL_IMAGES'); ?></a></p>
       <?php // foreach ($metadata as &$m) if (!@$m['title']) $m['title'] = basename($m['url']); ?>
       <script type='text/javascript'>

@@ -1,6 +1,6 @@
 <?php
 global $i18n_gallery_includes, $i18n_gallery_directly;
-$i18n_gallery_includes = array();
+$i18n_gallery_includes = [];
 $i18n_gallery_directly = null;
 
 function i18n_gallery_id($gallery) {
@@ -66,7 +66,7 @@ function i18n_gallery_is_show_image($pic) {
 function i18n_gallery_item($gallery, $pic) {
   if ($pic == null) return null;
   if (intval($pic) >= 0) $item = $gallery['items'][intval($pic)]; else $item = $gallery['items'][-intval($pic)-1];
-  return $item ? $item : $gallery['items'][0];
+  return $item ?: $gallery['items'][0];
 }
 
 function i18n_gallery_site_link() {

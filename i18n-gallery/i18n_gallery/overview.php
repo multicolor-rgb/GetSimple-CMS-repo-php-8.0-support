@@ -22,13 +22,13 @@ if (!I18nGallery::checkPrerequisites()) {
     $msg = i18n_r('i18n_gallery/DELETE_FAILURE');
   }
 }
-$galleries = array();
+$galleries = [];
 $gdir = GSDATAPATH . I18N_GALLERY_DIR;
 $dir_handle = @opendir($gdir);
 while ($filename = readdir($dir_handle)) {
   if (strrpos($filename,'.xml') === strlen($filename)-4) {
     $data = getXML($gdir . $filename);
-    $galleries[] = array('name' => (string) $data->name, 'title' => (string) $data->title, 'pubDate' => (string) $data->pubDate);
+    $galleries[] = ['name' => (string) $data->name, 'title' => (string) $data->title, 'pubDate' => (string) $data->pubDate];
   }
 }
 usort($galleries, 'i18n_gallery_compare_title');

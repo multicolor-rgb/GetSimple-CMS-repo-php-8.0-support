@@ -8,7 +8,7 @@ class I18nGallery {
   
   public static function getSettings($reload=false) {
     if (self::$settings != null && !$reload) return self::$settings;
-    self::$settings = array();
+    self::$settings = [];
     if (file_exists(GSDATAOTHERPATH.'i18n_gallery_settings.xml')) {
       $data = getXML(GSDATAOTHERPATH.'i18n_gallery_settings.xml');
       if ($data) {
@@ -20,7 +20,7 @@ class I18nGallery {
   
   public static function getPlugins() {
     if (self::$plugins == null) {
-      self::$plugins = array();
+      self::$plugins = [];
       $dir_handle = @opendir(GSPLUGINPATH.'i18n_gallery');
       while ($filename = readdir($dir_handle)) {
         if (substr($filename,0,7) == 'plugin_' && strrpos($filename,'.php') === strlen($filename)-4) {
@@ -32,14 +32,7 @@ class I18nGallery {
   }
   
   public static function registerPlugin($type, $name, $description, $edit_function, $header_function, $content_function) {
-    self::$plugins[$type] = array(
-      'type' => $type,
-      'name' => $name,
-      'description' => $description,
-      'edit' => $edit_function,
-      'header' => $header_function,
-      'content' => $content_function
-    );
+    self::$plugins[$type] = ['type' => $type, 'name' => $name, 'description' => $description, 'edit' => $edit_function, 'header' => $header_function, 'content' => $content_function];
   }
   
   public static function checkPrerequisites() {
@@ -65,7 +58,7 @@ class I18nGallery {
   }
   
   public static function getGallery($name) {
-    $gallery = array('items' => array());
+    $gallery = ['items' => []];
     if (!file_exists(GSDATAPATH.'i18n_gallery/'.$name.'.xml')) return $gallery;
     $data = getXML(GSDATAPATH . I18N_GALLERY_DIR . $name . '.xml');
     if (!$data) return $gallery;
@@ -81,7 +74,7 @@ class I18nGallery {
           $tags = preg_split('/\s*,\s*/', (string) $value->tags);
           foreach ($filters as $filter)  {
             if ($filter['filter'] == 'image-veto') {
-              if (call_user_func_array($filter['function'], array($name, $filename, $tags))) {
+              if (call_user_func_array($filter['function'], [$name, $filename, $tags])) {
                 $include = false;
                 break;
               }
@@ -89,7 +82,7 @@ class I18nGallery {
           }
         }
         if ($include) {
-          $item = array();
+          $item = [];
           foreach ($value as $itemkey => $itemvalue) {
             $item[$itemkey] = (string) $itemvalue;
           }
@@ -113,7 +106,7 @@ class I18nGallery {
     if (@$params['tags']) {
       // filter images
       $tags = preg_split('/\s*,\s*/', trim($params['tags']));
-      $newitems = array();
+      $newitems = [];
       foreach ($gallery['items'] as $item) {
         if (!@$item['tags']) continue;
         $itemtags = preg_split('/\s*,\s*/', trim($item['tags']));
@@ -151,7 +144,7 @@ class I18nGallery {
       //$languages = return_i18n_languages();
       if (!$lang) $lang = $language;
       $deflang = return_i18n_default_language();
-      $languages = @$lang && $lang != $deflang ? array($lang, $deflang) : array($deflang);
+      $languages = @$lang && $lang != $deflang ? [$lang, $deflang] : [$deflang];
       foreach ($languages as $lang) {
         $fullkey = 'title' . ($lang == $deflang ? '' : '_' . $lang);
         if (isset($gallery[$fullkey])) { $gallery['_title'] = $gallery[$fullkey]; break; }
@@ -177,7 +170,7 @@ class I18nGallery {
   }
   
   public static function getGalleryFromParamString($paramstr, $ignoreQuery=false, $ignoreSettings=false, $lang=null) {
-    $params = array();
+    $params = [];
     $paramstr = @$paramstr ? html_entity_decode(trim($paramstr), ENT_QUOTES, 'UTF-8') : '';
     while (preg_match('/^([a-zA-Z][a-zA-Z_-]*)[:=]([^"\'\s]*|"[^"]*"|\'[^\']*\')(?:\s|$)/', $paramstr, $pmatch)) {
       $key = $pmatch[1];

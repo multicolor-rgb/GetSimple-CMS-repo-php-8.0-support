@@ -54,7 +54,7 @@ class I18nGalleryFrontend {
     }
     $plugins = i18n_gallery_plugins();
     $plugin = @$plugins[$gallery['type']];
-    if ($plugin) call_user_func_array($plugin['content'], array($gallery, $pic));
+    if ($plugin) call_user_func_array($plugin['content'], [$gallery, $pic]);
   }
 
 }
