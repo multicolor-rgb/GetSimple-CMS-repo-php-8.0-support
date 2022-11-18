@@ -1,0 +1,53 @@
+.btn-contact,
+.btn-remove-contact {
+    line-height: 14px !important;
+    background-color: #182227;
+    color: #ccc;
+    font-weight: bold;
+    text-decoration: none;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+    transition: all 0.1s ease-in-out;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+.easyContactForm input,
+.easyContactForm textarea {
+    width: 100%;
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 10px;
+    border: solid 1px rgba(0, 0, 0, 0.3);
+}
+
+.easyContactSend {
+    position: fixed;
+    bottom: 20px;
+    left: 5%;
+    padding: 10px;
+    background: #506d2a;
+    width: 90%;
+
+    text-align: center;
+    color: #fff;
+    box-sizing: border-box;
+    border-radius: 5px;
+    z-index: 10000;
+}
+
+.easyContactSendNot {
+    position: fixed;
+    bottom: 20px;
+    left: 5%;
+    padding: 10px;
+    background: red;
+    width: 90%;
+
+    text-align: center;
+    color: #fff;
+    box-sizing: border-box;
+    border-radius: 5px;
+    z-index: 10000;
+}
