@@ -140,7 +140,7 @@ function i18n_specialpages_search_index($item) {
     require_once(GSPLUGINPATH.'i18n_specialpages/specialpages.class.php');
     $defs = I18nSpecialPages::getSettings();
     $fields = @$defs[(string) $item->special]['fields'];
-    if (count($fields) > 0) foreach ($fields as $field) {
+    if (count(array($fields)) > 0) foreach (array($fields) as $field) {
       if (@$field['index']) {
         $name = @$field['name'];
         if (@$field['type'] == 'wysiwyg') {

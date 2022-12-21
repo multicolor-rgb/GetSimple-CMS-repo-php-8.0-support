@@ -131,7 +131,7 @@ class I18nSpecialPagesBackend {
         // add field to identify special page type
         $xml->addChild('special', htmlspecialchars($name));
         // add special fields:
-        if (count(@$def['fields']) > 0) foreach ($def['fields'] as $field) {
+        if (count(array($def['fields'])) > 0) foreach ($def['fields'] as $field) {
           $name = $field['name'];
           if (isset($_POST['post-sp-'.strtolower($name)])) { 
             $xml->addChild(strtolower($name))->addCData(self::strip($_POST['post-sp-'.strtolower($name)])); 

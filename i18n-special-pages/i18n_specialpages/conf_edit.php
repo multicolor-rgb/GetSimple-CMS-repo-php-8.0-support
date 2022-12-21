@@ -422,7 +422,8 @@
       <?php } ?>
       <label for="post-searchcomponent"><?php i18n('i18n_specialpages/SEARCHCOMPONENT'); ?></label>
       <div class="i18n-sp-wrapper" id="searchcomponent" style="clear:both;">
-        <textarea id="post-searchcomponent" name="post-searchcomponent" style="height:200px"><?php echo htmlspecialchars(@$def['searchcomponent']); ?></textarea>
+        <textarea id="post-searchcomponent" name="post-searchcomponent" 
+        style="height:200px"><?php echo htmlspecialchars(@$def['searchcomponent']?? ''); ?></textarea>
       </div>
       <?php if ($isi18n && $languages) foreach ($languages as $lang) { ?>
       <div class="i18n-sp-wrapper" id="searchcomponent_<?php echo $lang; ?>" style="clear:both;display:none">
