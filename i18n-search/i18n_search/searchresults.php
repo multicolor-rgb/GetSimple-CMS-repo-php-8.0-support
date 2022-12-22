@@ -161,7 +161,7 @@ if (!function_exists('i18n_search_archive')) {
     </h3>
 <?php     if ($showDate) { ?>
   
-    <div class="search-entry-date"><?php echo str_replace('%','',date($dateFormat, $item->pubDate)); ?></div>
+    <div class="search-entry-date"><?php echo str_replace('%','',date('d-m-Y', $item->pubDate)); ?></div>
 <?php     } ?>
     <div class="search-entry-excerpt"><?php echo ''.$item->getExcerpt($item->content,$numWords); ?></div>
 <?php   
