@@ -80,7 +80,7 @@ if (!function_exists('i18n_search_archive')) {
     $results = $allresults;
   }
   
-  if($headerText!==''){
+  if($headerText!==null){
    $headText = trim($headerText);
   }else{
     $headText = '';
