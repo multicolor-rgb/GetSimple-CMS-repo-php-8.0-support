@@ -363,7 +363,7 @@
     </table>
     <p>
       <input type="hidden" id="post-defaultcontent" name="post-defaultcontent" 
-      value="<?php echo htmlspecialchars($def['defaultcontent'] ?? ''); ?>" />
+      value="<?php echo if(isset($def['defaultcontent'])){htmlspecialchars($def['defaultcontent'] ?? '')}; ?>" />
       <a class="setcontent" href="#"><?php i18n('i18n_specialpages/SET_DEFAULT_CONTENT'); ?></a>
     </p>
     <div id="ed_textarea" class="dialog" style="display:none">

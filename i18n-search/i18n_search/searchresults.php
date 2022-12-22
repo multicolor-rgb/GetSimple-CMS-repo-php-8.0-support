@@ -80,9 +80,15 @@ if (!function_exists('i18n_search_archive')) {
     $results = $allresults;
   }
   
-  if (trim($headerText) != '') {
+  if($headerText!==''){
+   $headText = trim($headerText);
+  }else{
+    $headText = '';
+  }
+  
+  if ($headText != '') {
 ?>
-  <h2 class="search-header"><?php echo $headerText; ?></h2>
+  <h2 class="search-header"><?php echo $headText; ?></h2>
 <?php
   }
   if (count($results) <= 0 && !$live) {
