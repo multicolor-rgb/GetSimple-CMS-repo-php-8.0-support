@@ -43,7 +43,7 @@ if (!function_exists('i18n_search_archive')) {
   $live = array_key_exists('live',$params) ? $params['live'] : null;
   $preview = array_key_exists('preview',$params) && $params['preview'];
   if (!$tags && !$words && !isset($_REQUEST['tags']) && !isset($_REQUEST['words']) && !$live) return;
-  $headerText = @$i18n['HEADER'];
+  $headerText = $i18n['HEADER'];
   $notFoundText = @$i18n['NOT_FOUND'];
   $showLanguage = $is_i18n && array_key_exists('showLanguage',$params) ? $params['showLanguage'] : $is_i18n;
   $showDate = array_key_exists('showDate',$params) ? $params['showDate'] : true;
