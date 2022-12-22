@@ -135,7 +135,8 @@ input{
 
 <form method="post" >
 <input type="text" style="display:none" value="<?php echo str_replace(" ","-",@$_GET['categoryname']);?>" name="check">
-<input type="text" required placeholder="<?php echo i18n_r("multiBlock/CATEGORYNAMEPLACEHOLDER");?>" class="mb_title" name="categoryname" value="<?php if(isset($_GET['categoryname'])){echo str_replace('-',' ',@$_GET['categoryname']);}?>">
+<input type="text" required placeholder="<?php echo i18n_r("multiBlock/CATEGORYNAMEPLACEHOLDER");?>" class="mb_title" 
+name="categoryname" value="<?php echo str_replace('-',' ',@$_GET['categoryname']??'');?>">
 
 
 <hr>
@@ -212,6 +213,7 @@ foreach ($multicategory as $category){
 <option>date</option>
 <option>image</option>
 <option>dropdown</option>
+<option>link</option>
 </select>
 <button class="mb_close">X</button>
 </li>
@@ -380,6 +382,8 @@ btn.preventDefault();
     <option>date</option>
     <option>image</option>
     <option>dropdown</option>
+    <option>link</option>
+
 </select>
 <button class="mb_close">X</button>
 </li>`;
