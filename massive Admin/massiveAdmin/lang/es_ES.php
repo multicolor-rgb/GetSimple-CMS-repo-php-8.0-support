@@ -1,0 +1,76 @@
+<?php 
+
+	$i18n = [
+     'MAITENANCETITLE' 				=> 'Maintenance Mode Options',
+     'MAINTENANCE_ON' 				=> '¿Modo de Mantenimiento activado?',
+     'CONTENT_MAINTENANCE_MODE' 		=> 'Contenido del Modo de Mantenimiento:',
+     'TURNONBOOTSTRAPGRID' 			=> '¿Activar Bootstrap-Grid 4.0?',
+     'TURNONBOOTSTRAPGRIDONTHEME'	=> '¿Agregar Bootstrap-Grid CSS al tema de front-end?',
+     'YES' 			=> 'Si',
+     'NO' 			=> 'No',
+     'SAVEOPTION' 	=> 'Guardar Cambios',
+     'SUPPORT' 		=> 'Si quieres apoyar mi trabajo a través de PayPal :) ¡Gracias! ',
+     'UPLOADFILE' 	=> 'Subir archivo',
+     'ANOTHERPAGE' 	=> '<strong>¡Cambios guardados!</strong> Ir a otra página :)',
+     'EDITCOMPONENTS'=> 'Editar componentes',
+     'MASSIVEADMINSETTINGSTITLE' 	=> 'Ajustes de MassiveAdmin',
+     'DROPFILES' 	=> 'Arrastra las imagenes aquí para subirlas',
+     'BOOTSTRAPTITLE' => 'Optiones de Bootstrap-Grid',
+     //options on file edit
+     'COPYFILE' 		=> 'Copiar archivo',
+     'RENAMEFILE' 	=> 'Renombrar / Cambiar dir',
+     'DOWNLOADFILE' 	=> 'Descargar',
+     'INFOCOPY'		=> 'Su archivo copiado se encuentra en ',
+     'INFOERROR' 	=> 'Ya existe un archivo con este nombre en este directorio ',
+     'FILENOW' 		=> 'Su archivo se encuentra en ',
+     //options on Create New User
+     'CREATENEWUSER' 	=> 'Crear Nuevo Usuario',
+     'USERNAMECREATE' 	=> 'Nombre de Usuario:',
+     'PASSWORDCREATE' 	=> 'Contraseña:',
+     'EMAILCREATE' 		=> 'Correo de Nuevo Usuario:',
+     'LANGCREATE' 		=> 'Idioma del Usuario:',
+     //options hidden section
+     'HIDEMENUTITLE' 	=> 'Ajustes de Usuarios y Secciones',
+     'SHOW' 				=> 'Mostar',
+     'HIDE' 				=> 'Ocultar',
+     'HIDSECTIONTITLE' 	=> '¿Cual Secciones Quieres Ocultar?',
+     'HIDEPAGES' 		=> '¿Ocultar sección de "<strong><i class="uil uil-desktop"></i> Páginas</strong>" ?',
+     'HIDEFILES' 		=> '¿Ocultar sección de "<strong><i class="uil uil-file"></i> Archivos</strong>"?',
+     'HIDETHEMES' 		=> '¿Ocultar sección de "<strong><i class="uil uil-paint-tool"></i> Temas</strong>"?',
+     'HIDEBACKUP' 		=> '¿Ocultar sección de "<strong><i class="uil uil-save"></i> Copias de seguridad</strong>"?',
+     'HIDEPLUGIN' 		=> '¿Ocultar sección de "<strong><i class="uil uil-plug"></i> Extensiones</strong>"?',
+     'HIDESUPPORT' 		=> '¿Ocultar sección de "<strong><i class="uil uil-life-ring"></i> Suporte</strong>"?',
+     'HIDESETTINGS' 		=> '¿Ocultar sección de "<strong><i class="uil uil-setting"></i> Ajustes de MassiveAdmin</strong>"?',
+     'HIDEI18NGALLERY' 	=> '¿Ocultar sección de "<strong><i class="uil uil-images"></i> i18n Gallery</strong>"? (if exists)',
+     'HIDEUSERS' 		=> 'Ocultar secciones para los siguientes usuarios:',
+     //user manager
+     'USERMANAGER' 	=> 'Gestionar Usuarios',
+     //user help settings
+     'USERHELPTITLE' => 'Ajustes de la Página de Ayuda',
+     'TURNON' 		=> '¿Activar?',
+     'HELP' 			=> 'Ayuda',
+     'USERHELP' 		=> 'Ayuda al Usuario',
+     //menu external
+     'MENUEXTERNAL' 	=> 'Ajustes de Enlaces de Menú Personalizado',
+     'LINKNAME' 		=> 'Nombre del Enlace:',
+     'LINKURL' 		=> 'URL del Enlace:',
+     'LINKICON' 		=> 'Icono de Enlace',
+     'NEWWINDOW' 	=> '¿Abrir enlace en una nueva ventana?',
+     'MOREICONS' 	=> '(Encuentra más íconos aquí.):',
+     'ADDLINK' 		=> 'Agregar nuevo enlace',
+     //own footer option
+     'OWNFOOTERTITLE' 	=> 'Opciones de Marca Blanca',
+     'OWNFOOTERNAME' 	=> 'Nombre de Pie Personalizado:',
+     'OWNFOOTERICON' 	=> 'Icono de Pie Personalizado (max 256px altura | .jpg, .jpeg, .png, .gif)',
+     'OWNLOGO' 			=> '¿Logotipo personalizado en la página de inicio de sesión?',
+     'OWNFOOTERLINK' 	=> 'Enlace de pie personalizado:',
+     'OWNFOOTERHEADER' 	=> 'CSS/Scripts personalizado de Encabezado:',
+     'OWNFOOTERFOOTER' 	=> 'CSS/Scripts personalizado de Pie:',
+     //owncolor
+     'CHANGETITLECOLOR' 	=> 'Cambiar los Colores de CMS',
+     'MAINCOLOR' 		=> 'Color Principal:',
+     'BGCOLOR' 			=> 'Color de Fondo:',
+     'CHANGENAME' => "cambie el apodo a algo que no sea el apodo del administrador",
+ ];
+
+;?>
