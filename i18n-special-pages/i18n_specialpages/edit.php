@@ -33,8 +33,8 @@
       $content = $spdef['defaultcontent'];
     }
   }
-  echo '<input type="hidden" name="special-creDate" value="'.htmlspecialchars($creDate).'"/>';
-  echo '<input type="hidden" name="post-special" value="'.htmlspecialchars($spname).'"/>';
+  echo '<input type="hidden" name="special-creDate" value="'.htmlspecialchars($creDate ?? '').'"/>';
+  echo '<input type="hidden" name="post-special" value="'.htmlspecialchars($spname?? '').'"/>';
   if (@$defs && count($defs) > 0) {
     echo '<table class="formtable specialtable" style="clear:both"><tbody>';
     $col = 0; $i = 0;

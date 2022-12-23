@@ -143,7 +143,7 @@ function i18n_customfields_customize_ckeditor($editorvar) { // copied and modifi
   foreach ($defs as $def) {
     $i++;
     $key = strtolower($def['key']);
-    $label = $def['label'];
+    $label = htmlspecialchars_decode($def['label']);
 		$type = $def['type'];
     $value = htmlspecialchars($id ? (isset($data_edit->$key) ? $data_edit->$key : '') : (isset($def['value']) ? $def['value'] : ''), ENT_QUOTES);
 		if ($col == 0) {
