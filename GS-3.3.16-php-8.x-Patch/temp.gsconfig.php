@@ -15,8 +15,6 @@ if (basename($_SERVER['PHP_SELF']) == 'gsconfig.php') {
 /*****************************************************************************/
 /** Below are constants that you can use to customize how GetSimple operates */ 
 
-# Hide I18N text on View All Pages.
-define('I18N_SINGLE_LANGUAGE',true);
 # Extra salt to secure your password with. Default is empty for backwards compatibility.
 #define('GSLOGINSALT', 'your_unique_phrase');
 
@@ -31,6 +29,12 @@ define('GSIMAGEWIDTH', '480');
 
 # Turn on debug mode
 #define('GSDEBUG', TRUE);
+
+# Hide I18N text on View All Pages.
+# define('I18N_SINGLE_LANGUAGE',true);
+
+# Ignore user's browser language
+# define('I18N_IGNORE_USER_LANGUAGE',true);
 
 # Ping search engines upon sitemap generation?
 define('GSDONOTPING', 1);
