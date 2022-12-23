@@ -73,7 +73,7 @@
 	<script type='text/javascript'>
 	function submitLink(url,parent) {
 		if (window.opener){
-			window.opener.<?php echo $func; ?>(<?php echo json_encode($sitepath); ?> + (parent ? parent + "/" : "") + url);
+			window.opener.<?php echo $func; ?>("<?php global $SITEURL;echo $SITEURL;?>" + (parent ? parent + "/" : "") + url);
 		}
 		window.close();
 	}
