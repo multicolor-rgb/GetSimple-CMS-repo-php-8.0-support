@@ -1,0 +1,110 @@
+ body{
+    position: relative;
+ }
+   
+    .body-hatext * {
+    font-size:100%;
+    font-size:x-large;
+    line-height: 1.2;
+
+    }
+
+    .body-hatext h1,.body-hatext h2,.body-hatext h3,.body-hatext h4,.body-hatext h5,.body-hatext h6,.body-hatext p{
+        font-size: unset;
+    
+        line-height: 1.2;
+    }
+
+ 
+    .body-hacontrast {
+        background: #000;
+        filter: invert(100%) !important;
+    }
+
+    .body-hacontrast img {
+        filter: invert(100%) !important;
+    }
+
+    .body-hacontrast .ha-menu {
+        filter: invert(100%) !important;
+    }
+
+    .body-hacontrast .ha-menu img {
+        filter: invert(0) !important;
+    }
+
+
+    .body-hagrayscale {
+        filter: saturate(0);
+    }
+
+
+
+
+
+    body .ha-menu{
+        display: flex;
+        flex-direction: column;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        position: fixed !important;
+        top: 40vh !important;
+        right: 0 !important;
+    }
+
+    .ha-menu img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .ha-menu button {
+        background: #fafafa;
+        border: solid 1px #ddd;
+        box-sizing: border-box;
+        padding: 5px;
+        transition: all 250ms linear;
+    }
+
+    .ha-menu .first {
+        border-top-left-radius: 10px;
+    }
+
+
+    .ha-menu .last {
+        border-bottom-left-radius: 10px;
+    }
+
+    .ha-menu button:hover,
+    .ha-menu button.ha_active {
+        filter: invert(100%)
+    }
+
+
+    .ha-menu li {
+        position: relative;
+    }
+
+    .ha-menu span {
+        position: absolute;
+        width: 80px;
+        left: -85px;
+        font-family: Arial, Helvetica, sans-serif;
+        min-height: 15px;
+        font-size: 11px !important;
+        line-height: 1rem !important;
+        top: 20px;
+        text-align: center;
+        background: #fafafa;
+        border: solid 1px #ddd;
+        display: none;
+        opacity: 0;
+        transition: all 250ms linear;
+    }
+
+    .ha-menu li:hover span {
+
+        opacity: 1;
+        display: block;
+    }
+ 
