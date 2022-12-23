@@ -114,7 +114,7 @@ border: none;
         name="name"
         class="namefile"
         placeholder="title"
-        value="<?php if(isset($_GET['namefile'])){echo str_replace("-"," ",@$_GET['namefile']);}?>">
+        value="<?php echo str_replace("-"," ",@$_GET['namefile']??'');?>">
 
     <hr>
 
@@ -286,12 +286,39 @@ font-size: 15px;display:inline-block;">'.$category->title.' :</p>
     
     
     
-    }else{
+    }elseif($category->select == 'link'){
 
-        
-     
+
+        echo '
+        <p style="margin: 0;
+  margin:0;
+margin-top: 20px;
+font-weight: 400px;
+font-size: 15px;">'.$category->title.' :</p> 
+        <select style="width:100%;padding:15px;display:block;border:solid 1px #ddd; background:#fff;margin-top:10px;" class="'.str_replace(" ","",$category->label).'" name="'.str_replace(" ","",$category->label).'">';
+
+    foreach (glob(GSDATAPAGESPATH."*.{xml}",GLOB_BRACE) as $page) {
     
 
+    $path_parts = pathinfo($page);
+
+    global $SITEURL;
+
+        echo "<option value='".$SITEURL.$path_parts['filename']."'  >".$path_parts['filename']."</option>";
+
+ 
+        
+        };
+
+        echo '</select>';
+
+
+        echo '<script> document.querySelector("select.'.$category->label.'").value = "'.$valer.'"; </script>';
+ 
+        
+
+    }else{
+ 
         echo '<p style="margin: 0;
   margin:0;
 margin-top: 20px;

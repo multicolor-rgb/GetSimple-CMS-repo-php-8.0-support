@@ -11,7 +11,7 @@ i18n_merge($plugin_id) || i18n_merge($plugin_id, 'en_US');
 register_plugin(
 	$thisfile, //Plugin id
 	'MultiBlock 🧱', 	//Plugin name
-	'2.0', 		//Plugin version
+	'3.0', 		//Plugin version
 	'Mateusz Skrzypczak',  //Plugin author
 	'https://discord.gg/d5s83yk4R6', //author website
 	'create block what you want', //Plugin description
@@ -117,7 +117,9 @@ global $getmb;
 function mbvalue($value){
 
 	global $getmb;
-	echo html_entity_decode( $getmb->$value);	
+	if(isset($getmb->$value)){
+		echo html_entity_decode( $getmb->$value );	
+	};
  
  };
 
@@ -286,20 +288,22 @@ $info = pathinfo($mbBlock);
 	echo"
 		<script>
 
-const arraylist = '".@file_get_contents(GSDATAOTHERPATH . 'multiBlock/'.$category.'/order.txt')."';
+const arraylist".str_replace('-','',$category)." = '".@file_get_contents(GSDATAOTHERPATH . 'multiBlock/'.$category.'/order.txt')."';
  
-const arraychange = arraylist.split(',');
+const arraychange".str_replace('-','',$category)." = arraylist".str_replace('-','',$category).".split(',');
 
 
 
-arraychange.forEach((x,i)=>{
-if(document.querySelector(`".$orderid." [data-id='`+x+`']`)!== null){
-  document.querySelector('".$orderid."').append(document.querySelector(`[data-id='`+x+`']`)); 
-} 
- });
+arraylist".str_replace('-','',$category).".split(',').forEach((x,i)=>{
+	if(document.querySelector(`".$orderid." [data-id='`+x+`']`)!== null){
+	  document.querySelector('".$orderid."').append(document.querySelector(`".$orderid." [data-id='`+x+`']`)); 
+	} 
+	 });
+	
+	</script>";
 
-</script>";
-		
+	global $counterOrder;
+$counterOrder = 0;
 
 	}
 
